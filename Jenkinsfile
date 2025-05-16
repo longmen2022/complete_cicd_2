@@ -53,8 +53,8 @@ pipeline {
         stage('Trivy Scan') {
             steps {
                 sh """
-                trivy --severity HIGH,CRITICAL --no-progress --format table \
-                -o trivy-report.html image ${JOB_NAME_NOW}:latest
+                trivy image --severity=HIGH,CRITICAL --no-progress --format=table \
+                -o trivy-report.html ${JOB_NAME_NOW}:latest
                 """
             }
         }
