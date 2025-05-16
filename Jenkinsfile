@@ -57,7 +57,7 @@ pipeline {
             steps {
                 sh """
                 trivy image --severity=HIGH,CRITICAL --no-progress --format=table \
-                -o trivy-report.html ${JOB_NAME_NOW}:${IMAGE_TAG}
+                -o trivy-report.html ${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG}
                 """
             }
         }
