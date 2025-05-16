@@ -11,20 +11,15 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
+        stage('GitHub') {
             steps {
                 git branch: 'main', credentialsId: 'jen-git-dind', url: 'https://github.com/longmen2022/complete_cicd_2.git'
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
         stage('Unit Test') {
             steps {
+                sh 'npm install'
                 sh 'npm test'
             }
         }
@@ -37,7 +32,7 @@ pipeline {
                         ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url= http://sonarqube-dind:9000 \
+                        -Dsonar.host.url=http://sonarqube-dind:9000 \
                         -Dsonar.login=${SONAR_TOKEN}
                         """
                     }
