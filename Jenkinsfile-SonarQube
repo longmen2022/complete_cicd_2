@@ -8,7 +8,7 @@ pipeline {
     environment {
         SONAR_PROJECT_KEY = 'complete-cicd-02'
         SONAR_SCANNER_HOME = tool 'SonarQubeScanner'
-        DOCKER_HUB_REPO = 'lmen776/complete-cicd-02'
+	DOCKER_HUB_REPO = 'lmen776/complete-cicd-02'
     }
 
     stages {
@@ -37,15 +37,10 @@ pipeline {
                         -Dsonar.login=${SONAR_TOKEN}
                         """
                     }
-                }
-            }
-        }
-
-        stage('Docker Image') {
-            steps {
-                script {
-                    docker.build("${DOCKER_HUB_REPO}:latest")
-                }
+                } stage('Docker Image'){
+			steps{
+				script {
+					docker.build("${{DOCKER_HUB_REPO}}latest")}}}
             }
         }
     }
